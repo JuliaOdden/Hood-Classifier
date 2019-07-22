@@ -3,7 +3,7 @@
 ## Overview
 Notes on the test: each test is divided into different trials or cycles consisting of one raise of the hood and one lower, with pauses at the extremes of each. Pushing the case closed results in positive data; pulling it open reads as negative force. Hereafter, "peak" will be used to describe the maximum value obtained during the closing of the case and "trough" will describe **absolute value** of the minimum value obtained while opening the case.
 
-Scroll to the bottom under **TEST/Functions/TEST.classify()** if you're looking for an outline of the tests I use to sort cases.
+Scroll to the bottom under **[TEST.classify()](https://github.com/JuliaOdden/Hood-Classifier/blob/master/README.md#testclassify---liststring)** if you're looking for an outline of the tests I use to sort cases.
 
 ### Dependencies
 #### DATAFILE
@@ -171,7 +171,7 @@ Reference function that returns "peak" or "trough," depending on which magnitude
 Neatly prints the results of each function described above without performing any classifications.
 
 
-# `TEST.classify() -> List[String]`
+#### `TEST.classify() -> List[String]`
 
 This is where we sort the case into either passing or failing, and ideally tells you why. The tests are as follows:
 
