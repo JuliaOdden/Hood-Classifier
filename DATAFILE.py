@@ -283,8 +283,11 @@ class DATAFILE:
 
 
     def cut_peak(self):
-        data = self.get_data()[1]
-        time = self.get_data()[0]
+        self.split_data()
+        data = self.subsections[0]
+        time = []
+        for x in range(len(data)):
+            time.append(x)
         newdata = data[0:42]+data[74:]
         newtimes = time[0:42]+time[74:]
         return(newtimes, newdata, self.get_data()[2])
