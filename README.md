@@ -82,7 +82,11 @@ In the event that `num_passes` is greater than zero, you may want to create an a
 ### TEST
 #### Constructor
 ```python
-t1 = TEST(d: DATAFILE, peak_threshold: float, trough_threshold: float, min_threshold: float, max_threshold: float, s_jag_thresh: float, sim_thresh: float, hard_fail_peak: float, hard_fail_trough: float, hard_fail_trilinear: float, click_threshold: float, click_lower_threshold: float, hard_min: float, spline_thresh: float)
+t1 = TEST(d: DATAFILE, peak_threshold: float, trough_threshold: float, min_threshold: float, max_threshold: float,
+
+s_jag_thresh: float, sim_thresh: float, hard_fail_peak: float, hard_fail_trough: float, hard_fail_trilinear: float, 
+
+click_threshold: float, click_lower_threshold: float, hard_min: float, spline_thresh: float)
 
 # OR, use default constructor:
 
