@@ -271,22 +271,3 @@ class TEST:
             return(fails)
         else:
             return(["pass!"])
-
-
-
-        
-
-folder = '/Users/julia/Desktop/newdata'
-files = os.listdir(folder)
-
-for f in files:
-    if not f.startswith(".DS"):
-        d = DATAFILE(folder+'/'+f, 3, old=True)
-        t = TEST(d, peak_threshold=1.2, trough_threshold=1.0, min_threshold=1.6, max_threshold=2.21,
-        s_jag_thresh=1.83, sim_thresh=0.25, hard_fail_peak=1.55, hard_fail_trough=2.25, 
-        hard_fail_trilinear=3.3, click_threshold=0.07, click_lower_threshold=0.045, hard_min=0.2, spline_thresh=1.408)
-        print()
-        print(f)
-        print(d.get_data()[2])
-        for failure in t.classify():
-            print(failure)
