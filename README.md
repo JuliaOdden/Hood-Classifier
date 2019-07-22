@@ -128,7 +128,6 @@ That's a lot of variables.
 folder = '~/datafiles'
 files = os.listdir(folder)
 
-accuracy = 0
 for f in files:
     d = DATAFILE(folder+'/'+f, 3, old=True)
     c = d.get_data()[2]
