@@ -22,7 +22,7 @@ from typing import List
 import numpy as np
 from scipy.interpolate import UnivariateSpline
 ```
-**Note:** `Scipy` and `numpy` do not come default with Python. To install with HomeBrew, run this command in your terminal:
+**Note:** `Scipy` and `numpy` do not come default with Python. To install with pip, run this command in your terminal:
 
 ```
 python -m pip install numpy scipy
