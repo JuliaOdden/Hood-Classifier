@@ -24,7 +24,7 @@ from scipy.interpolate import UnivariateSpline
 ```
 `DATAFILE` is responsible for the interpretation of the data read from the mechanical test; it splices the data into trials and then into sections of trials by index and time. `DATAFILE` is designed to be closely compatible with the `matplotlib` library: it often returns x- and y-axes along with colors in tuples for ease of use.
 
-`TEST` is a black-box class that takes a `DATAFILE` and a series of thresholds and spits out results in various formats (demonstrated in **Outputs**).
+`TEST` is a black-box class that takes a `DATAFILE` and a series of thresholds and spits out results in various formats (demonstrated in **[Outputs](https://github.com/JuliaOdden/Hood-Classifier/blob/master/README.md#outputs)**.
 
 ## Functionalities
 ### DATAFILE
