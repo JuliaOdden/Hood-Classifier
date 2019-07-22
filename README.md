@@ -22,6 +22,13 @@ from typing import List
 import numpy as np
 from scipy.interpolate import UnivariateSpline
 ```
+**Note:** `Scipy` and `numpy` do not come default with Python. To install with HomeBrew, run this command in your terminal:
+
+```
+python -m pip install numpy scipy
+```
+or visit this link for instructions: https://www.scipy.org/install.html
+
 `DATAFILE` is responsible for the interpretation of the data read from the mechanical test; it splices the data into trials and then into sections of trials by index and time. `DATAFILE` is designed to be closely compatible with the `matplotlib` library: it often returns x- and y-axes along with colors in tuples for ease of use.
 
 `TEST` is a black-box class that takes a `DATAFILE` and a series of thresholds and spits out results in various formats (demonstrated in **[Outputs](https://github.com/JuliaOdden/Hood-Classifier/blob/master/README.md#outputs)**).
