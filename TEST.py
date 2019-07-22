@@ -2,8 +2,6 @@ from various_get_datas import DATAFILE
 import os
 from pathlib import Path
 from typing import List
-#import matplotlib.pyplot as plt
-#from matplotlib.pyplot import figure
 import numpy as np
 from scipy.interpolate import UnivariateSpline
 
