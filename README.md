@@ -171,7 +171,7 @@ Reference function that returns "peak" or "trough," depending on which magnitude
 Neatly prints the results of each function described above without performing any classifications.
 
 
-`TEST.classify() -> List[String]`
+# `TEST.classify() -> List[String]`
 
 This is where we sort the case into either passing or failing, and ideally tells you why. The tests are as follows:
 
