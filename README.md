@@ -219,7 +219,7 @@ This is where we sort the case into either passing or failing, and ideally tells
 
     **Fail message**: "fail by minimum/click comparison"
 
-12) Does the peak exceed the given soft threshold? Is the difference between the magnitudes of the peak and the trough bigger than the given similarity threshold? If so, FAIL. The snap on the way down is too tough.
+12) Does the peak exceed the given soft threshold? Is the difference between the magnitudes of the peak and the trough bigger than the given similarity threshold? If so, FAIL. The snap on the way down is too tough in comparison with the snap on the way up.
 
     **Fail message**: "fail by peak/similarity comparison"
 
