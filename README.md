@@ -75,7 +75,7 @@ In the event that `num_passes` is greater than zero, you may want to create an a
 
 `DATAFILE.cut_peak() -> Tuple(List[Float], List[Float], String)`
 
-#### NOTE: this function assumes that `old=True` AND only cares about the first cycle.
+#### NOTE: this function only cares about the first cycle.
 
 `cut_peak()` is very similar to `remove_plateaus()`, but more computationally efficient because it does a lot less. It cuts both the time and data lists of a data file to indeces `[0:42]` and `[74:]`. For my convenience, I hard-coded those numbers. This just removes the irrelevant data in the middle of the single-cycle tests I was doing. It returns a tuple of (0) a single list of non-continuous time signatures; (1) a single list of non-continuous data points; and (2) the color associated with the ranking of the case to facilitate graphing.
 
