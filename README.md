@@ -128,7 +128,7 @@ That's a lot of variables.
 
 `hard_min` is a hard threshold defining the lowest acceptable magnitude on both the peak and the trough. Defaults to 0.52.
 
-`spline_thresh` is a hard threshold for yet another measure of jaggedness. I'll detail the `spline_jaggedness()` function firther in **functions**, but the basic idea is that I use `Scipy`'s spline functionality to make a smooth curve approximating the force graph and then find the magnitude of the difference between the approximation and the actual data points. It's similar to `trilinear_jaggedness()` (also detailed below) but a little more refined. Defaults to 1.74. 
+`spline_thresh` is a hard threshold for yet another measure of jaggedness. I'll detail the `spline_jaggedness()` function further in **functions**, but the basic idea is that I use `Scipy`'s spline functionality to make a smooth curve approximating the force graph and then find the magnitude of the difference between the approximation and the actual data points. It's similar to `trilinear_jaggedness()` (also detailed below) but a little more refined. Defaults to 1.74. 
 
 #### Example Use
 ```python
