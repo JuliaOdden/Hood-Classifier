@@ -175,7 +175,7 @@ Neatly prints the results of each function described above without performing an
 
 This is where we sort the case into either passing or failing, and ideally tells you why. The tests are as follows:
 
-1) Does the trilinear jaggedness test return only (0, 0), indicating an approximation of only one line? If so, FAIL. THe case has no spring.
+1) Does the trilinear jaggedness test return only (0, 0), indicating an approximation of only one line? If so, FAIL. The case has no spring.
 
     **Fail message**: "fail by trilinear test"
 
