@@ -207,7 +207,7 @@ This is where we sort the case into either passing or failing, and ideally tells
 
     **Fail message**: "fail by second derivative test"
 
-9) Does the value of the slope jaggedness test fall below 0.7 (hard-coded)? If so, does the "clickiness" fall below the lower of the two thresholds? If so, FAIL. The case's action is too "flat": i.e., there are no features in the action.
+9) Does the value of the slope jaggedness (i.e. the second derivative) test fall below 0.7 (hard-coded)? If so, does the "clickiness" fall below the lower of the two thresholds? If so, FAIL. The case's action is too "flat": i.e., there are no features in the action.
 
     **Fail message**: "fail by flatness test"
 
