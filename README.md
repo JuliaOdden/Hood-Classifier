@@ -53,7 +53,7 @@ for f in files:
 #### Functions
 `DATAFILE.get_data() -> Tuple(List[Float], List[Float], String)`
 
-The most basic data-getting function returns a tuple of (0) either a list of times taken from the data file given to the class (if `old=True`) or a list of consecutive integers the same length as the given data file; (1) a list of the data points from the given data file; and (2) the string of a  color corresponding to the rating of the particular case (red for fail, blue for margin, green for pass) to help with data graphing and visualization. For training, the `DATAFILE` class expects the first line of every case's file to be that case's rating. For testing, enter the `old_get_data()` and `get_new_data()` methods and change `first` to `False`.
+The most basic data-getting function returns a tuple of (0) either a list of times taken from the data file given to the class (if `old=True`) or a list of consecutive integers the same length as the given data file; (1) a list of the data points from the given data file; and (2) the string of a  color corresponding to the rating of the particular case (red for fail, blue for margin, green for pass) to help with data graphing and visualization. For training, the `DATAFILE` class expects the first line of every case's file to be that case's rating. For testing, enter the hidden `old_get_data()` and `get_new_data()` methods and change `first` to `False`.
 
 `DATAFILE.get_raw_data() -> List[Float]`
 
