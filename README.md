@@ -55,7 +55,7 @@ d = DATAFILE(filename: str, has_ranking: bool)
 ```
 `filename` corresponds to the specific directory of the file containing the data from a test of any length on a single case. The `DATAFILE` class can handle any type of document supported by Python's built-in reader, including .txt files and .log files.
 
-`old` is a Boolean asking whether or not the first line of the data file is a ranking for the case.
+`has_ranking` is a Boolean asking whether or not the first line of the data file is a ranking for the case.
 #### Example Use
 ```python
 folder = '~/hood_data_files'
