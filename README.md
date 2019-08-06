@@ -16,7 +16,7 @@ from random import randint
 
 #### TEST
 ```python 
-from DATAFILE import DATAFILE
+from DATAFILEclass import DATAFILE
 import os
 from pathlib import Path
 from typing import List
