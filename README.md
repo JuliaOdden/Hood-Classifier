@@ -35,7 +35,7 @@ or visit this link for instructions: https://www.scipy.org/install.html
 If you're running the `test()` function in a different file from where you have `DATAFILE` and `TEST`, you'll need to import those two as well as a couple other dependencies:
 ```python
 from TESTclass import TEST
-from DATAFILE import DATAFILE
+from DATAFILEclass import DATAFILE
 import os
 from pathlib import Path
 ```
