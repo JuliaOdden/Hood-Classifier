@@ -1,270 +1,137 @@
-from various_get_datas import DATAFILE
+from DATAFILE import DATAFILE
 import os
 from pathlib import Path
 from typing import List
 import numpy as np
 from scipy.interpolate import UnivariateSpline
+from random import randint
 
 class TEST:
 
-    def __init__(self, d: DATAFILE, peak_threshold=1.2, trough_threshold=1.0, min_threshold=1.6, max_threshold=2.2,
-        s_jag_thresh=1.75, sim_thresh=0.25, hard_fail_peak=1.55, hard_fail_trough=2.25, 
-        hard_fail_trilinear=3.0, click_threshold=0.07, click_lower_threshold=0.04, hard_min=0.52, spline_thresh=1.74):
-        self.pthresh = peak_threshold
-        self.tthresh = trough_threshold
-        self.mthresh = min_threshold
-        self.data = d.cut_peak()[1][3:-4]
-        self.st = s_jag_thresh
-        self.simt = sim_thresh
-        self.hfp = hard_fail_peak
-        self.hft = hard_fail_trough
-        self.hftl = hard_fail_trilinear
-        self.maxthresh = max_threshold
-        self.clthresh = click_threshold
-        self.chthresh = click_lower_threshold
-        self.hmin = hard_min
+    def __init__(self, d: DATAFILE, low_snap_threshold=0.38, high_snap_threshold=0.4, value_at_transition=0.3, low_total=25.0, mid_total=27.0, 
+                    spline_total=2.15, peak=1.2, high_total=60.0, section_jaggedness=1.0, total_jaggedness=2.67, snap_vat=0.0):
         self.datafile = d
-        self.sthresh = spline_thresh
-    
-    def gettransition(self):
+        self.lst = low_snap_threshold
+        self.hst = high_snap_threshold
+        self.vat = value_at_transition
+        self.lt = low_total
+        self.mt = mid_total
+        self.st = spline_total
+        self.p = peak
+        self.ht = high_total
+        self.sj = section_jaggedness
+        self.tj = total_jaggedness
+        self.sv = snap_vat
+        self.data = d.cut_peak()[3:-4]
+
+    def set_data_average(self):
+        self.data = self.datafile.cut_average()[1][3:-4]
+
+    def snappiness(self):
+        self.set_data_average()
         data = self.data
-        slopes = []
-        absslopes = []
-        prev = 0
-        for i in range(1, len(data)):
-            absslope = abs(data[i] - data[prev])
-            slope = data[i] - data[prev]
-            absslopes.append(absslope)
-            slopes.append(slope)
-            prev+=1
-        transition = absslopes.index(max(absslopes))
-        lowerslopes = slopes[1:transition-1]
-        upperslopes = slopes[transition+1:-1]
+        transition = 38
+        tval = data[transition]
+        lower = data[0:transition]
+        diff = max(lower) - data[transition]
+        return(tval, diff)
 
-        return(transition, lowerslopes, upperslopes)
-
-    # 1
-
-    def trilinear_jaggedness(self):
-        transition = self.gettransition()[0]
+    def has_spring(self):
+        self.set_data_average()
+        transition = 38
         data = self.data
-
-        # lower
         lowersection = data[0:transition+1]
-
         upperlimit = max(lowersection)
         mind = lowersection.index(upperlimit)
-
-        section1 = lowersection[0:mind+1]
-
-        lowerlimit = min(lowersection[mind:])
-        lind = lowersection[mind:].index(lowerlimit)+mind
-
-        section2 = lowersection[mind:lind+1]
-
-        if (lind == transition and not mind == transition):
-            slope_line_1 = (max(section1) - section1[0]) / len(section1)
-            init = section1[0]
-            line1 = []
-            for x in range(len(section1)):
-                y = slope_line_1 * x + init
-                line1.append(y)
-            slope_line_2 = (min(section2) - section2[0]) / len(section2)
-            init = section2[0]
-            line2 = []
-            for x in range(len(section2)):
-                y = slope_line_2 * x + init
-                line2.append(y)
-            downjag = 0
-            index = 0
-            for point in section1:
-                diff = abs(point - line1[index])
-                downjag+=diff
-                index+=1
-            upjag = 0
-            index = 0
-            for point in section2:
-                diff = abs(point - line2[index])
-                upjag+=diff
-                index+=1
-            slopediff = abs(slope_line_1 - slope_line_2)
-            return(round(downjag+upjag, 3), round(slopediff, 3))
-
-        elif (mind == transition):
-            return(0, 0)
-
+        if (mind == transition):
+            return(False)
         else:
-            section3 = data[lind:transition+1]
-            slope_line_1 = (max(section1) - section1[0]) / len(section1)
-            init = section1[0]
-            line1 = []
-            for x in range(len(section1)):
-                y = slope_line_1 * x + init
-                line1.append(y)
-            slope_line_2 = (min(section2) - section2[0]) / len(section2)
-            init = section2[0]
-            line2 = []
-            for x in range(len(section2)):
-                y = slope_line_2 * x + init
-                line2.append(y)
-            slope_line_3 = (max(section3) - section3[0]) / len(section3)
-            line3 = []
-            init = section3[0]
-            for x in range(len(section3)):
-                y = slope_line_3 * x + init
-                line3.append(y)
-            downjag = 0
-            index = 0
-            for point in section1:
-                diff = abs(point - line1[index])
-                downjag+=diff
-                index+=1
-            upjag = 0
-            index = 0
-            for point in section2:
-                diff = abs(point - line2[index])
-                upjag+=diff
-                index+=1
-            remainingjag = 0
-            index = 0
-            for point in section3:
-                diff = abs(point - line3[index])
-                remainingjag+=diff
-                index+=1
-            slopediff = abs(slope_line_1 - slope_line_2)
-            return(round(upjag+downjag+remainingjag, 5), round(slopediff, 4))
-
-    def slope_jaggedness(self):
-        transition, lower, rise = self.gettransition()
-
-        # lower
-
-        lmag = 0
-        prev = 0
-        for point in range(1, len(lower)):
-            diff = abs(lower[point] - lower[prev])
-            lmag+=diff
-            prev+=1
-
-        # raise
-
-        rmag = 0
-        prev = 0
-        for point in range(1, len(rise)):
-            diff = abs(rise[point] - rise[prev])
-            rmag+=diff
-            prev+=1
-
-        return(round(lmag+rmag, 3))
-
+            return(True)
 
     def spline_jaggedness(self):
-
-        def spline(d: DATAFILE):
-            y = d.cut_peak()[1][0:38]
+        def spline(l: List):
+            y = l
             time = []
             for x in range(len(y)):
                 time.append(x)
-            spline = UnivariateSpline(time, y)
+            spline = UnivariateSpline(time, y, k=3)
             xs = np.linspace(0, len(time), len(time))
-            spline.set_smoothing_factor(0.1)
+            spline.set_smoothing_factor(0.5)
             return(spline(xs))
-
+        def cut_curve(d: DATAFILE):
+            data = d.get_random_curve()
+            transition = 41
+            curve1 = data[0:transition]
+            curve2 = data[transition+1:]
+            return(curve1, curve2)
+        def splinedata(d: DATAFILE):
+            curve1, curve2 = cut_curve(d)
+            spline1 = spline(curve1)
+            spline2 = spline(curve2)
+            return(spline1, spline2)
         d = self.datafile
-        s = spline(d)
-        difference = 0
-        for x in range(len(d.cut_peak()[1][0:38])):
-            diff = abs(s[x] - d.cut_peak()[1][x])
-            difference+=diff
-        return difference
-
-    # 2
+        splines = splinedata(d)
+        curves = cut_curve(d)
+        differences = []
+        for i in range(2):
+            diff = []
+            for x in range(len(splines[i])):
+                diff.append(abs(splines[i][x] - curves[i][x]))
+            differences.append(sum(diff[8:-8]))
+        return differences
 
     def pt(self):
+        self.set_data_average()
         data = self.data
         peak = abs(max(data))
         trough = abs(min(data))
         return(peak, trough)
-
-    # 3
     
-    def sim(self):
-        peak, trough = self.pt()
-        return(round(abs(peak - trough), 3))
-    
-    # 4
-
-    def compmag(self):
-        peak, trough = self.pt()
-        if(peak > trough):
-            return "peak"
-        else:
-            return "trough"
-    
-    
-    # TESTING
+    def total(self):
+        self.set_data_average()
+        total = 0
+        for point in self.data:
+            point=abs(point)
+            total+=point
+        return total
 
     def print_battery(self):
-        print()
-        print("spline jaggedness: ", self.spline_jaggedness())
-        print("trilinear: ", self.trilinear_jaggedness()[0])
-        print("slope jaggedness: ", self.slope_jaggedness())
+        print("val at transition, snappiness: ", self.snappiness())
+        print("jaggedness: ", self.spline_jaggedness())
+        print("combined spline: ", sum(self.spline_jaggedness()))
         print("peak/trough: ", self.pt())
-        print("p/t similarity: ",self.sim())
-        print("p/t compare: ", self.compmag())
-        print("combined magnitude: ", self.pt()[0]+self.pt()[1])
-        print("clickiness: ", self.trilinear_jaggedness()[1])
-        print("-----------------------------")
-        print()
+        print("total: ", self.total())
         
-
-    
     def classify(self):
         fails = []
         fail = False
-        if (self.trilinear_jaggedness()[0] == 0): 
-            fails.append("fail by trilinear test")
+        if (not self.has_spring()): 
+            fails.append("fail: case does not have a spring")
             fail = True
-        if (self.trilinear_jaggedness()[0] > self.hftl):
-            fails.append("fail by trilinear threshold")
+        if (self.snappiness()[0] > self.vat and self.snappiness()[1] < self.lst):
+            fails.append("fail by snappiness test")
             fail = True
-        if (self.pt()[0] > self.hfp):
+        if (self.total() < self.lt and self.snappiness()[1] < self.hst):
+            fails.append("fail by total magnitude test")
+            fail = True
+        if (self.total() < self.mt and sum(self.spline_jaggedness()) > self.st):
+            fails.append("fail by low net/high friction test")
+            fail = True
+        if (self.pt()[0] > self.p):
             fails.append("fail by peak")
             fail = True
-        if (self.pt()[0] < self.hmin):
-            fails.append("fail by peak minimum")
+        if (self.total() > self.ht):
+            fails.append("fail by total")
             fail = True
-        if (self.pt()[1] < self.hmin):
-            fails.append("fail by trough minimum")
+        if (self.spline_jaggedness()[0] > self.sj and self.spline_jaggedness()[1] > self.sj):
+            fails.append("fail by section jaggedness")
             fail = True
-        if (self.pt()[1] > self.hft):
-            fails.append("fail by trough")
+        if (self.spline_jaggedness()[0] + self.spline_jaggedness()[1] > self.tj):
+            fails.append("fail by total jaggedness")
             fail = True
-        if (self.spline_jaggedness() > self.sthresh):
-            if (self.pt()[1] > 1.4):
-                fails.append("fail by spline/trough")
-                fail = True
-        if (self.slope_jaggedness() > self.st):
-            if (not self.trilinear_jaggedness()[1] > self.clthresh):
-                fails.append("fail by second derivative test")
-                fail = True
-        if (self.slope_jaggedness() < 0.7):
-            if (self.trilinear_jaggedness()[1] < self.chthresh):
-                fails.append("fail by flatness test")
-                fail = True
-        if (self.pt()[0] + self.pt()[1] > self.maxthresh):
-            if(self.trilinear_jaggedness()[1] < self.clthresh):
-                if(self.spline_jaggedness() > 1.5):
-                    fails.append("fail by maximum/click comparison")
-                    fail = True
-        if (self.pt()[1]+self.pt()[0] < self.mthresh):
-            if(self.trilinear_jaggedness()[1] < self.chthresh):
-                fails.append("fail by minimum/click comparison")
-                fail = True
-        if (self.pt()[0] > self.pthresh):
-            if(self.sim() > self.simt):
-                fails.append("fail by peak/similarity comparison")
-                fail = True
+        if (self.snappiness()[0] < self.sv):
+            print("this case is very good")
+            fail=False
         if fail:
             return(fails)
         else:
