@@ -155,7 +155,7 @@ for f in files:
     for failure in t.classify():
         print(failure)
 ```
-NB: If you're relying on this GitHub repo, you'll never have to use the constructor for TEST. Included in the repository is a function called `test()`[INSERT LINK], which will automatically create instances of `TEST` and takes a path to either individual filenames or folders of data files as input.
+NB: If you're relying on this GitHub repo, you'll never have to use the constructor for TEST. Included in the repository is a function called **[test()](https://github.com/JuliaOdden/Hood-Classifier/blob/master/README.md#test-2)**, which will automatically create instances of `TEST` and takes a path to either individual filenames or folders of data files as input.
 
 #### Functions
 `TEST.set_data_average() -> None`
