@@ -1,7 +1,6 @@
 from TESTclass import TEST
-from DATAFILE import DATAFILE
+from DATAFILEclass import DATAFILE
 import os
-from pathlib import Path
 
 def test(path):
     if os.path.isdir(path):
