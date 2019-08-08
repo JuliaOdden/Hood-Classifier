@@ -21,7 +21,7 @@ def test(path):
                 print()
     elif os.path.isfile(path):  
         print(path)
-        d = DATAFILE(path+'/'+f, has_ranking=True)
+        d = DATAFILE(path, has_ranking=True)
         t = TEST(d)
         for failure in t.classify():
             print(failure)
