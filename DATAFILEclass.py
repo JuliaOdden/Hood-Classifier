@@ -1,8 +1,5 @@
 import os
-from typing import List
 from random import randint 
-import matplotlib.pyplot as plt
-from matplotlib.pyplot import figure
 
 class DATAFILE:
     def __init__(self, filename, has_ranking=False):
