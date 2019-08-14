@@ -1,5 +1,5 @@
-from testRAISE import TEST
-from datafileRAISE import DATAFILE
+from TESTclass import TEST
+from DATAFILEclass import DATAFILE
 import os
 
 def test():
