@@ -3,6 +3,8 @@
 ## Overview
 Notes on the test: each test is divided into different trials or cycles consisting of one raise of the hood and one lower, with pauses at the extremes of each. Pushing the case closed results in positive data; pulling it open reads as negative force. Hereafter, "peak" will be used to describe the maximum value obtained during the closing of the case and "trough" will describe **absolute value** of the minimum value obtained while opening the case.
 
+For details on UI and the bash file, find it **[at the bottom of this document](https://github.com/JuliaOdden/Hood-Classifier/blob/master/README.md#UI---liststring)**.
+
 If you're looking for an outline of the tests used to sort the cases, jump here: **[TEST.classify()](https://github.com/JuliaOdden/Hood-Classifier/blob/master/README.md#testclassify---liststring)** .
 
 ### Dependencies
@@ -273,3 +275,5 @@ pass!
 
 ---------------------------------
 ```
+# UI
+The `testforUI()` function provides some added file-saving functionalities. Users never actually see it; it's in the `main_with_test.sh` bash script, so it runs when the bash script is run. On the pi, the included `test.desktop` file turns into a desktop application (the app icon image is also provided--just make sure you change the directory in the file) that, when double-clicked, will run the bash script. That script will run the test on the case, then the `testforUI()` function, and then print out the results in a Linux terminal.
