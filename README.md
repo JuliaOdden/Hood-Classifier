@@ -3,7 +3,7 @@
 ## Overview
 Notes on the test: each test is divided into different trials or cycles consisting of one raise of the hood and one lower, with pauses at the extremes of each. Pushing the case closed results in positive data; pulling it open reads as negative force. Hereafter, "peak" will be used to describe the maximum value obtained during the closing of the case and "trough" will describe **absolute value** of the minimum value obtained while opening the case.
 
-For details on UI and the bash file, find it **[at the bottom of this document](https://github.com/JuliaOdden/Hood-Classifier/blob/master/README.md#UI---liststring)**.
+For details on UI and the bash file, find it **[at the bottom of this document](https://github.com/JuliaOdden/Hood-Classifier/blob/master/README.md#ui)**.
 
 If you're looking for an outline of the tests used to sort the cases, jump here: **[TEST.classify()](https://github.com/JuliaOdden/Hood-Classifier/blob/master/README.md#testclassify---liststring)** .
 
