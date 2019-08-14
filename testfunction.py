@@ -29,4 +29,4 @@ def test(path):
         else:
             return("FAIL", fails)
 
-test('/Users/julia/Desktop/halftests')
+# test('/Users/~insert path here~')
