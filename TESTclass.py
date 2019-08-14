@@ -1,4 +1,4 @@
-from DATAFILE import DATAFILE
+from DATAFILEclass import DATAFILE
 import os
 from random import randint
 
