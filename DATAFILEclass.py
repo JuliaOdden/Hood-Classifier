@@ -93,16 +93,3 @@ class DATAFILE:
                 s+=section[i]
             avg_curve.append(s/len(sections))
         return(ticks, avg_curve, d[2])
-
-fol = '/Users/julia/Desktop/halftests'
-# files = os.listdir(fol)
-# for f in files:
-#     # if not f.startswith(".DS"):
-#     if f.startswith("case6"):
-#         d = DATAFILE(fol+'/'+f, has_ranking=False)
-#         time = d.get_data()[0]
-#         data = d.get_data()[1]
-#         color = 'blue'
-#         figure(f)
-#         plt.plot(time, data, color=color)
-#         plt.show()
