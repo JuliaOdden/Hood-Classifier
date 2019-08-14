@@ -1,4 +1,4 @@
-# DATAFILE and TEST Classes, test() Function
+# DATAFILE and TEST Classes, test() Function, UI
 `DATAFILE` reads and interprets data taken from force tests on case hoods. `TEST` sorts cases into pass/fail based on information gathered from each case's `DATAFILE`. `test(path)` is a helper function designed to black-box the whole process.
 ## Overview
 Notes on the test: each test is divided into different trials or cycles consisting of one raise of the hood and one lower, with pauses at the extremes of each. Pushing the case closed results in positive data; pulling it open reads as negative force. Hereafter, "peak" will be used to describe the maximum value obtained during the closing of the case and "trough" will describe **absolute value** of the minimum value obtained while opening the case.
