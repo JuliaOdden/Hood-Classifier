@@ -6,8 +6,9 @@ For convenience, and so you don’t have to dive into my code to edit file paths
 1)	First things first, make a new folder on the desktop. Name it *hood_flex_motor*.
 2)	Into *hood_flex_motor*, place a) `main_with_test.sh`, b) `hood_flex_motor.py`, c) `hood_flex_uart.py`, d) `testRAISE.py`, e) `testforUI.py`, f) `datafileRAISE.py`, g) `green.jpg`, h) a .txt file called `file_ints.txt` that contains just a 0 on the first line.
 3)	To make the `.sh` file executable, open a Linux terminal and run the following command: 
-
-`chmod +x /home/pi/Desktop/hood_flex_motor/main_with_test.sh`
+```
+chmod +x /home/pi/Desktop/hood_flex_motor/main_with_test.sh
+```
 
 4)	Drop the `test.desktop` file onto the desktop. Try double-clicking it. If the motor starts moving and the test runs perfectly, you’re done! If not…
 5)	Left click the `test.desktop` file (should be labeled *“TEST THAT CASE!”*). Go to *"Properties"*, then to *"Permissions"*.  Under *“Access Control”*, switch the *"Execute"* option to *“Anyone”*. Try it again.
